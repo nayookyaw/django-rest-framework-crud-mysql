@@ -23,11 +23,14 @@
 
 # create new app
 `if you want to create new app, just use below command` <br>
-    $ python manage.py startapp src/`your_app_name`
+    $ python manage.py startapp `your_app_name` src/`your_app_name`
+
+
+* Make sure to edit `src` path in `apps.py`
 
 # migrate
 `create migrate file` <br>
-    $ python manage.py makemigrations src/`your_app_name` <br>
+    $ python manage.py makemigrations `your_app_name` <br>
 
 `after creating migration file and run makemigrations from ROOT path of project`
     $ python manage.py makemigrations
@@ -43,3 +46,6 @@ https://www.django-rest-framework.org/tutorial/3-class-based-views/
 
 # encrypt and decrypt 
 https://chat.openai.com/share/0060e397-75ab-47f4-b9d2-715af5ee3a50
+
+# middleware
+https://medium.com/@techWithAditya/middleware-magic-how-to-use-django-middleware-for-advanced-error-handling-and-exception-management-78573a27204e
