@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     # added by Nay Oo Kyaw
     'rest_framework',
     'knox',
+    'rest_framework_swagger',
+    'drf_yasg',
+    'rest_framework_docs',
     'src.role.apps.RoleConfig',
     'src.user.apps.UserConfig',
 ]
@@ -146,6 +149,8 @@ REST_FRAMEWORK: Any = {
     # 'DEFAULT_PERMISSION_CLASSES': (
     #     'rest_framework.permissions.IsAuthenticated',
     # ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+
     'EXCEPTION_HANDLER': 'src.exceptions.custom_exception_handler.custom_exception_handler',
 }
 

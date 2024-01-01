@@ -1,5 +1,6 @@
 from django.db.models.query import QuerySet
 from rest_framework.utils.serializer_helpers import ReturnDict
+from rest_framework.exceptions import ValidationError
 
 from .models import Role
 from .serializers import RoleSerializer
@@ -10,13 +11,15 @@ class RoleRepositories():
     def save_role(cls, role_serializer: RoleSerializer) -> Role | None:
         if role_serializer.is_valid():
             return role_serializer.save()
-        return None
+        else:
+            raise ValidationError(detail=role_serializer.errors)
     
     @classmethod
     def update_role(cls, role_serializer: RoleSerializer) -> Role | None:
         if role_serializer.is_valid():
             return role_serializer.save()
-        return None
+        else:
+            raise ValidationError(detail=role_serializer.errors)
     
     @classmethod
     def delete_role(cls, role: Role) -> None:

@@ -9,6 +9,7 @@
 6. don't use request data before is_valid()
 7. must validate request data in services.py
 8. import module using `....`, DON'T import using absolute path
+9. raise ValidationError(detail=serializer.errors) `ONLY` in `repositories` for <b>*add and *update</b>
 
 # variable declaration
 sample - sample_variable <br>

@@ -39,6 +39,9 @@
 `after you create migrate file, just run migrate command as below`
     $ python manage.py migrate
 
+# API Document (Swagger)
+http://localhost:8000/docs/ <br>
+
 # References
 https://testdriven.io/blog/drf-basics/
 https://www.django-rest-framework.org/api-guide/serializers/#modelserializer

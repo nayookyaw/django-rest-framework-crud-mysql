@@ -5,4 +5,7 @@ django-cors-headers==4.3.1
 mysqlclient==2.2.1
 pylint-django==2.5.5
 termcolor==2.4.0
-django-rest-knox==4.2.0        
+django-rest-knox==4.2.0
+django-rest-swagger==2.2.0
+drf-yasg==1.21.7
+drfdocs==0.0.11
