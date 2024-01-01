@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from typing import Any
+from datetime import timedelta
+from rest_framework.settings import api_settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
 
     # added by Nay Oo Kyaw
     'rest_framework',
+    'knox',
     'src.role.apps.RoleConfig',
     'src.user.apps.UserConfig',
 ]
@@ -134,3 +138,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # added by Nay Oo Kyaw
 AUTH_USER_MODEL = 'user.User'
+
+REST_FRAMEWORK: Any = {
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     'knox.auth.TokenAuthentication',
+    # ],
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ),
+    'EXCEPTION_HANDLER': 'src.exceptions.custom_exception_handler.custom_exception_handler',
+}
+
+# knot custom setting
+REST_KNOX: Any = {
+  'SECURE_HASH_ALGORITHM': 'cryptography.hazmat.primitives.hashes.SHA512',
+  'AUTH_TOKEN_CHARACTER_LENGTH': 64,
+  'TOKEN_TTL': timedelta(minutes=3),
+  'USER_SERIALIZER': 'knox.serializers.UserSerializer',
+  'TOKEN_LIMIT_PER_USER': None,
+  'AUTO_REFRESH': False,
+  'EXPIRY_DATETIME_FORMAT': api_settings.DATETIME_FORMAT,
+}
+

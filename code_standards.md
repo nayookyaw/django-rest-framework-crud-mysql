@@ -8,6 +8,7 @@
 5. in views.py, must put try-catch
 6. don't use request data before is_valid()
 7. must validate request data in services.py
+8. import module using `....`, DON'T import using absolute path
 
 # variable declaration
 sample - sample_variable <br>
@@ -29,7 +30,8 @@ There are TWO types of status code
 2. Validation Failed - HTTP code[200], custom json code [400] 
 3. Condition failure - HTTP code[200], custom json code [400] 
 4. Code Error/Exception - HTTP code[500], custom json code [500] 
-5. Unauthorized - HTTP code[401], custom json code [401]\
+5. Unauthorized - HTTP code[401], custom json code [401]
+6. Forbidden - HTTP code[403], custom json code [403]
 
 # Important Notes
 1. Even though validation, condition failed, just run HTTP code [200] and custom [400]

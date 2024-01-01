@@ -3,5 +3,6 @@ django==5.0
 djangorestframework==3.14.0
 django-cors-headers==4.3.1
 mysqlclient==2.2.1
-pylint-django
-termcolor==2.4.0            
+pylint-django==2.5.5
+termcolor==2.4.0
+django-rest-knox==4.2.0        

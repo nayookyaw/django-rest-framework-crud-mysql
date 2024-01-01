@@ -11,14 +11,14 @@ from .request_body.role_update import RoleUpdate
 from .request_body.role_delete import RoleDelete
 from .request_body.role_list import RoleList
 from .serializers import RoleSerializer
-from .repositories import Repositories
+from .repositories import RoleRepositories
 from .models import Role
 
-class Services():
+class RoleServices():
     
     @classmethod
     def get_role_by_id(cls, id:int) -> Response:
-        role : Role | None = Repositories.get_role_by_id(id=id)
+        role : Role | None = RoleRepositories.get_role_by_id(id=id)
         if role is not None:
             role_serializer: RoleSerializer = RoleSerializer(instance=role)
             return ResponseUtil.custom_success_response(
@@ -36,7 +36,7 @@ class Services():
         if request_serializer.is_valid():
             validated_data : Any = request_serializer.validated_data
             new_role : RoleSerializer = RoleSerializer(data=validated_data)
-            Repositories.save_role(role_serializer=new_role)
+            RoleRepositories.save_role(role_serializer=new_role)
             return ResponseUtil.custom_success_response(
                 message="role has been saved successfully"
             )
@@ -51,10 +51,10 @@ class Services():
         if request_serializer.is_valid():
             validated_data : Any = request_serializer.validated_data
             
-            exist_role : Role | None = Repositories.get_role_by_id(id=validated_data.get('id'))
+            exist_role : Role | None = RoleRepositories.get_role_by_id(id=validated_data.get('id'))
             if exist_role is not None:
                 update_role : RoleSerializer = RoleSerializer(instance=exist_role, data=validated_data)
-                Repositories.update_role(role_serializer=update_role)
+                RoleRepositories.update_role(role_serializer=update_role)
                 return ResponseUtil.custom_success_response(
                     message="role has been updated successfully"
                 )
@@ -73,11 +73,11 @@ class Services():
         if request_serializer.is_valid():
             validated_data : Any = request_serializer.validated_data
             
-            exist_role : Role | None = Repositories.get_role_by_id(id=validated_data.get('id'))
+            exist_role : Role | None = RoleRepositories.get_role_by_id(id=validated_data.get('id'))
             if exist_role is not None:
                 exist_role.deleted_at = datetime.now()
                 role_serializer: RoleSerializer = RoleSerializer(instance=exist_role)
-                Repositories.update_role(role_serializer=role_serializer)
+                RoleRepositories.update_role(role_serializer=role_serializer)
                 return ResponseUtil.custom_success_response(
                     message="role has been deleted successfully"
                 )
@@ -100,7 +100,7 @@ class Services():
             limit: int = validated_data.get("limit")
             search_text: str = validated_data.get("searchText")
 
-            role_list: ReturnDict = Repositories.get_role_list(offset=offset, limit=limit, search_text=search_text)
+            role_list: ReturnDict = RoleRepositories.get_role_list(offset=offset, limit=limit, search_text=search_text)
             role_count: int = 1
             res_data: dict[str, ReturnDict | int] = {
                 'list': role_list,

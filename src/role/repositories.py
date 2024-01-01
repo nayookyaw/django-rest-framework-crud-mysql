@@ -4,7 +4,7 @@ from rest_framework.utils.serializer_helpers import ReturnDict
 from .models import Role
 from .serializers import RoleSerializer
 
-class Repositories():
+class RoleRepositories():
 
     @classmethod
     def save_role(cls, role_serializer: RoleSerializer) -> Role | None:
