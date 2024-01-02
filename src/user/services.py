@@ -4,7 +4,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth import authenticate
 
-from knox.models import AuthToken
+from knox.models import AuthToken, AuthTokenManager
 
 from typing import Any
 from datetime import datetime
@@ -13,6 +13,7 @@ from ..utils.response_util import ResponseUtil
 from .serializers import UserSerializer
 from .request_body.user_add import UserAdd
 from .repositories import UserRepositories
+from .models import User
 
 class UserServices():
     
@@ -50,6 +51,33 @@ class UserServices():
         if user is not None:
             knox_token: str = AuthToken.objects.create(user=user)[1]
             print (knox_token)
-            return Response(data={"success": "success credentials"})
+
+            res_data: dict[str, str] = {
+                'token': knox_token
+            }
+            return ResponseUtil.custom_success_response(
+                data=res_data,
+                message="user login successfully"
+            )
         else:
-            return Response(data={"error": "Invalid credentials"})
+            return ResponseUtil.custom_fail_response(
+                message="user does not exist"
+            )
+    
+    @classmethod
+    def logout_user(cls, request) -> Response:
+        exist_user: User | None = UserRepositories.get_user_by_id(1)
+        if exist_user is not None:
+            user_tokens: AuthTokenManager = AuthToken.objects.filter(user=exist_user)
+
+            # Delete each token
+            for token in user_tokens:
+                token.delete()
+            
+            return ResponseUtil.custom_success_response(
+                message="user logout successfully"
+            )
+        else:
+            return ResponseUtil.custom_fail_response(
+                message="user does not exist"
+            )
