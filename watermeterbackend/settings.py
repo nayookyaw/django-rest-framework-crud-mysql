@@ -59,6 +59,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # added by Nay Oo Kyaw
+    'src.middlewares.custom_auth.CustomAuth'
 ]
 
 ROOT_URLCONF = 'watermeterbackend.urls'

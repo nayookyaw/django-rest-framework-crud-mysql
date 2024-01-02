@@ -50,7 +50,6 @@ class UserServices():
         user: AbstractBaseUser | None = authenticate(username=username, password=password)
         if user is not None:
             knox_token: str = AuthToken.objects.create(user=user)[1]
-            print (knox_token)
 
             res_data: dict[str, str] = {
                 'token': knox_token
