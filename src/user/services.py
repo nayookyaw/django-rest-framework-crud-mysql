@@ -65,7 +65,7 @@ class UserServices():
     
     @classmethod
     def logout_user(cls, request) -> Response:
-        exist_user: User | None = UserRepositories.get_user_by_id(1)
+        exist_user: User | None = UserRepositories.get_user_by_id(id=1)
         if exist_user is not None:
             user_tokens: AuthTokenManager = AuthToken.objects.filter(user=exist_user)
 

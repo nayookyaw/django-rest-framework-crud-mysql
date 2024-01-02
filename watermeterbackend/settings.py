@@ -61,7 +61,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # added by Nay Oo Kyaw
-    'src.middlewares.custom_auth.CustomAuth'
+    'src.middlewares.custom_auth.CustomAuth',
+    'src.middlewares.extend_knox_token.ExtendTokenExpirationMiddleware',
 ]
 
 ROOT_URLCONF = 'watermeterbackend.urls'
@@ -161,7 +162,7 @@ REST_FRAMEWORK: Any = {
 REST_KNOX: Any = {
   'SECURE_HASH_ALGORITHM': 'cryptography.hazmat.primitives.hashes.SHA512',
   'AUTH_TOKEN_CHARACTER_LENGTH': 64,
-  'TOKEN_TTL': timedelta(minutes=3),
+  'TOKEN_TTL': timedelta(minutes=10),
   'USER_SERIALIZER': 'knox.serializers.UserSerializer',
   'TOKEN_LIMIT_PER_USER': None,
   'AUTO_REFRESH': False,

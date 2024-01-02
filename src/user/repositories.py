@@ -21,3 +21,13 @@ class UserRepositories():
             user = None
         
         return user
+    
+    @classmethod
+    def get_user_by_token(cls, id: int) -> User | None:
+        user: User | None = None
+        try:
+            user = User.objects.get(pk=id)
+        except User.DoesNotExist:
+            user = None
+        
+        return user
